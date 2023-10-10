@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700&family=Josefin+Slab:ital,wght@0,300;0,400;0,600;0,700;1,300;1,500;1,600&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+*{
+    background-color: black;
+margin: 0;
+padding: 0;
+overflow-x: hidden;
+scrollbar-highlight-color: aquamarine;
+}
+::-webkit-scrollbar {
+width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+box-shadow: inset 0 0 5px rgb(8, 8, 8); 
+border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: rgb(4, 185, 240); 
+border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #2b2f31; 
+border-radius: 10px;
+}
+:root{
+--font-h1: "Baloo Da 2", serif; /*variavel para caso queira mudar as fontes n precise 1por 1*/
+--font-h2: "Josefin Slab", serif; /*fonte secundaria, h2*/
+--font-sobre: "Mulish", serif; /*fonte de ação p usar nos links, buttom, td q for ação*/
+}
+header{
+height: 10vh;
+padding-top: 0%;
+padding-bottom: 5vh;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+text-align: center;
+text-shadow: .2vh .2vh .2vh black;
+color: white;
+background: #bdc3c7;  
+background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+background: linear-gradient(to right, #2c3e50, #bdc3c7); 
+overflow: hidden;
+}
+footer{
+height: 8vh;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+text-align: center;
+text-shadow: .2vh .2vh .2vh black;
+color: white;
+background: #bdc3c7;  
+background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+background: linear-gradient(to right, #2c3e50, #bdc3c7); 
+}
+.social-media{
+display: flex;
+position: relative;
+width: 100%;
+justify-content: space-evenly; /*distribui um espacinho entre os elemttos*/
+}
+h1{
+font-family: var(--font-h1);
+padding: 2vh;
+text-transform: capitalize;
+text-decoration: none;
+}
+h2{
+text-align: center;
+font-weight: bolder;
+padding: 2vh;
+font-family: monospace;
+font-size: 32px;
+
+}
+footer p{
+font-size: 20px;
+}
+div .wrapper p{
+margin: 5vh 0 0 5vh;
+font-family: var(--font-sobre);
+letter-spacing: .5px;
+}
+mark:hover{
+filter: invert();
+cursor: pointer;
+}
+i:hover{
+color: rgb(0, 0, 0);
+}
+a{
+text-decoration: solid;
+color: #2b2f31;
+}
+a:hover{
+color: red;
+}
+i{
+font-size: 32px;
+}
+section i{
+color: #bdc3c7 ;
+}
+
+div .wrapper{
+width: 60%;
+height: 100%;
+}
+div .img-wrapper{
+width: 50%;
+height: 50%;
+margin-left: 30vh;
+border-radius: 100%;
+box-shadow: .4rem .5rem 1rem black;
+}
+
+/*certificados css*/
+.gallery{
+display: flex;
+width: 90%;
+margin-left: 10%;
+}
+
+.gallery-item img{
+position: relative;
+width: 50%;
+height: auto;
+border-style: solid;
+cursor: pointer;
+}
+
+hr.footer-hr{
+    margin:1%;
+}
+a.escola{
+    font-style: italic;
+    color: red;
+}
+mark.alegria{
+    font-weight: lighter;
+    font-style: italic;
+    font-family:'Trebuchet MS';
+}
+
+/*media queries*/
+@media (max-width:415px) and (orientation:portrait){
+header{
+    height:15vh;
+}
+.social-media{
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: space-evenly; /*distribui um espacinho entre os elemttos*/
+}
+div.wrapper{
+    width: 100%;
+    font-family: var(--font-sobre);
+}
+.wrapper p{
+    margin: 0 !important;
+    width: 95%;
+    padding: 1% 1%;
+    text-align: center;
+    font-family: var(--font-sobre);
+}
+div .img-wrapper{
+width: 95%;
+height: 40%;
+margin-left: 2%;
+border-radius: 100%;
+}
+
+.gallery{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 25%;
+}
+
+.gallery-item img{
+    width: 50%;
+    height: auto;
+    border-style: solid;
+    cursor: pointer;
+}
+}
+/* Smartphone modo paisagem */
+@media (max-width:927px) and (orientation:landscape){
+            header{
+                height:25vh;
+            }
+            footer p{
+                text-align: center;
+            }
+}

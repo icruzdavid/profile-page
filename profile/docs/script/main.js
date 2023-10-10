@@ -1,0 +1,1 @@
+alrt('Experimente clicar nos textos coloridos')

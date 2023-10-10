@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700&family=Josefin+Slab:ital,wght@0,300;0,400;0,600;0,700;1,300;1,500;1,600&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+* {
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    scrollbar-highlight-color: rgb(112, 245, 234);
+    color: white;
+}
+
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px rgb(0, 0, 0);
+    /*border-radius: 10px;*/
+}
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #000000b2, #0300cba2, #0000008e);
+    /*border-radius: 10px;*/
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #2b2f31;
+    border-radius: 10px;
+}
+
+:root {
+    --font-h1: "Baloo Da 2", serif;
+    /*variavel para caso queira mudar as fontes n precise 1por 1*/
+    --font-h2: "Josefin Slab", serif;
+    /*fonte secundaria, h2*/
+    --font-sobre: "Mulish", serif;
+    /*fonte de ação p usar nos links, buttom, td q for ação*/
+}
+
+
+
+header {
+    height: 13vh;
+    padding-top: 0%;
+    padding-bottom: 5vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    text-shadow: .2vh .2vh .2vh rgb(255, 92, 92);
+    color: white;
+    overflow: hidden;
+}
+
+footer {
+    height: 8vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    text-shadow: .2vh .2vh .2vh rgb(153, 1, 255);
+    color: white;
+    background: #bdc3c7;
+    background: -webkit-linear-gradient(to right, #0073e6, #bdc3c7);
+    background: linear-gradient(to right, #000000, #0300cb, #9955e7);
+    overflow: hidden;
+}
+
+.social-media {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: #02020205;
+    /*distribui um espacinho entre os elemttos*/
+}
+
+h1 {
+    font-family: var(--font-h1);
+    padding: 2vh;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+    font-weight: bolder;
+    padding: 2vh;
+    font-family: monospace;
+    font-size: 32px;
+
+}
+
+footer p {
+    font-size: 20px;
+}
+
+div .wrapper p {
+    margin: 5vh 0 0 5vh;
+    font-family: var(--font-sobre);
+    letter-spacing: .5px;
+}
+
+mark:hover {
+    filter: invert();
+    cursor: pointer;
+}
+
+i:hover {
+    color: rgb(0, 0, 0);
+}
+
+a {
+    text-decoration: solid;
+    color: #550dff;
+}
+
+a:hover {
+    color: rgb(21, 255, 0);
+}
+
+i {
+    font-size: 32px;
+}
+
+section i {
+    color: #bdc3c7;
+}
+
+div {
+    font-family: var(--font-sobre);
+}
+
+.wrapper {
+    margin: 1% 10% 1% 10%;
+    text-align: center;
+}
+
+.wrapper p,
+h2 {
+    background-color: #00000005;
+    border-radius: 1px;
+}
+
+div .img-wrapper {
+    width: 50%;
+    height: 50%;
+    border-radius: 100%;
+    box-shadow: .4rem .5rem 1rem black;
+}
+
+/*certificados css*/
+.gallery {
+    display: flex;
+    width: 90%;
+    margin-left: 10%;
+}
+
+.gallery-item img {
+    position: relative;
+    width: 50%;
+    height: auto;
+    border-style: solid;
+    cursor: pointer;
+}
+
+hr.footer-hr {
+    margin: 1%;
+}
+
+a.escola {
+    font-style: italic;
+    color: red;
+}
+
+mark.alegria {
+    font-weight: lighter;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+}
+
+button {
+
+    margin-left: 80%;
+}
+
+.sair {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.sair:hover {
+    color: chartreuse;
+}
+
+/*media queries*/
+@media (max-width:416px) and (orientation:portrait) {
+
+    .social-media {
+        display: flex;
+        position: relative;
+        width: 100%;
+        justify-content: space-evenly;
+        /*distribui um espacinho entre os elemttos*/
+    }
+
+    div .wrapper {
+        width: 100%;
+        font-family: var(--font-sobre);
+    }
+
+    .wrapper p {
+        margin: 0;
+        width: 95%;
+        padding: 1% 1%;
+        text-align: center;
+        font-family: var(--font-sobre);
+    }
+
+    div .img-wrapper {
+        width: 75%;
+        height: auto;
+        margin-left: 0.1px;
+        border-radius: 100%;
+    }
+
+    .gallery {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin-left: 25%;
+    }
+
+    .gallery-item img {
+        width: 50%;
+        height: auto;
+        border-style: solid;
+        cursor: pointer;
+    }
+
+    .gallery {
+        display: flex;
+        position: relative;
+        margin: 5%;
+        height: 5%;
+        cursor: pointer;
+    }
+}
+
+/* Smartphone modo paisagem */
+@media (max-width:927px) and (orientation:landscape) {
+    header {
+        height: 25vh;
+    }
+
+    footer p {
+        text-align: center;
+    }
+}

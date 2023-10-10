@@ -1,0 +1,102 @@
+:root {
+    --input-linear: linear-gradient(120deg, #161616, #1228ee);
+    --button-linar: linear-gradient(120deg, #e2c4d0, #0300cb, #dd1464);
+    --white: #ffff
+
+}
+
+
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.login {
+    height: 100vh;
+    background: var(--input-linear); /*aqui é a cor do degrade d fundo*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login_container {
+    min-height: 400px;
+    width:  300px;
+    background-color: var(--white); /*aqui é a cor do conteiner branco login*/
+    box-sizing: border-box; /*calcula o tam do padding ficar maior o navgtor*/
+    padding: 32px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login_title {
+    margin-bottom: 32px;
+    color: #303030; /*aqui é a cor do texto grande LOGIN*/
+}
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.login_input{
+    height: 48px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 8px;
+    border: unset;
+    outline: none;
+}
+.login_input-border{
+    height: 1px;
+    width: 100%;
+    margin-bottom: 16px;
+    background-color: #cfcfcf;
+    transition: .3s ease-in-out;
+}
+.login_input-border::after{
+    content:'';
+    display: block;
+    height: 1px;
+    width: 0;
+    margin-bottom: 16px;
+    background: var(--input-linear);
+    transition: .3s ease-in-out;
+}
+
+.login_input:focus + .login_input-border::after {
+    width: 100%;
+} 
+
+.login_submit{
+    height: 48px;
+    width: 100%;
+    outline: none;
+    background: var(--button-linar);
+    background-size: 200%;
+    margin-bottom: 32px;
+    color:var(--white);
+    font-size: 16px;
+    font-weight: bold;
+    border: unset;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .5s, ease-in-out;
+}
+
+.login_submit:hover{
+    background-position:right;
+    transition: .3s;
+}
+
+.login_reset:hover{
+    font-size: 12px;
+    color: #88151592;
+    background-position:right;
+    transition: .3s;
+}
+.login_reset{
+    font-size: 12px;;
+}
