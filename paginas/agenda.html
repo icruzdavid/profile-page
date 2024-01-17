@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 50px;
+      padding: 10px;
+    }
+
+    .form-container,
+    .contacts-container {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .contacts-container {
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .search-bar {
+      margin-bottom: 20px;
+    }
+
+    .contact-item {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-item .btn {
+      padding: 0.2rem 0.5rem;
+      font-size: 12px;
+    }
+
+    .contact-item .btn-group {
+      display: flex;
+    }
+
+    .contact-item .btn-group button {
+      margin-right: 5px;
+    }
+
+    @media (min-width: 576px) {
+      .container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .form-container,
+      .contacts-container {
+        width: 48%;
+      }
+
+      .contacts-container {
+        border-left: 1px solid #ccc;
+        padding-left: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .contact-item .btn {
+        padding: 0.2rem 0.5rem;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .contact-item .btn {
+        padding: 0.2rem 0.3rem;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-container">
+    <h2>Cadastro de Usuários</h2>
+    <form id="userForm">
+      <div class="form-group">
+        <label for="name">Nome:</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="department">Departamento:</label>
+        <input type="text" class="form-control" id="department" required>
+      </div>
+      <div class="form-group">
+        <label for="ramal">Ramal:</label>
+        <input type="text" class="form-control" id="ramal" required>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="salvarContato()">Salvar</button>
+      <button type="button" class="btn btn-danger" onclick="limparLocalStorage()">Limpar LocalStorage</button>
+    </form>
+  </div>
+
+  <div class="contacts-container">
+    <h2>Lista de Contatos</h2>
+    <div class="search-bar">
+      <input type="text" class="form-control" id="searchInput" placeholder="Pesquisar" oninput="filtrarContatos()">
+    </div>
+    <ul id="contactsList" class="list-unstyled"></ul>
+  </div>
+</div>
+
+<script>
+  function salvarContato() {
+    const name = document.getElementById('name').value;
+    const department = document.getElementById('department').value;
+    const ramal = document.getElementById('ramal').value;
+    const email = document.getElementById('email').value;
+
+    const contato = { name, department, ramal, email };
+
+    // Recuperar contatos existentes do localStorage
+    const contatosSalvos = JSON.parse(localStorage.getItem('contatos')) || [];
+
+    // Adicionar novo contato
+    contatosSalvos.push(contato);
+
+    // Salvar no localStorage
+    localStorage.setItem('contatos', JSON.stringify(contatosSalvos));
+
+    // Limpar formulário
+    document.getElementById('userForm').reset();
+
+    // Atualizar lista de contatos
+    exibirContatos();
+  }
+
+  function exibirContatos() {
+    const contatosSalvos = JSON.parse(localStorage.getItem('contatos')) || [];
+    const contactsList = document.getElementById('contactsList');
+
+    // Limpar a lista antes de exibir os contatos
+    contactsList.innerHTML = '';
+
+    contatosSalvos.forEach((contato, index) => {
+      const listItem = document.createElement('li');
+      listItem.classList.add('contact-item');
+      
+      const infoContainer = document.createElement('div');
+      infoContainer.innerHTML = `
+        <strong>${contato.name}</strong> - ${contato.department} - Ramal: ${contato.ramal} - Email: ${contato.email}
+      `;
+      
+      const actionsContainer = document.createElement('div');
+      
+      const editButton = document.createElement('button');
+      editButton.classList.add('btn', 'btn-warning', 'mr-2');
+      editButton.innerHTML = 'Editar';
+      editButton.onclick = () => editarContato(index);
+      
+      const deleteButton = document.createElement('button');
+      deleteButton.classList.add('btn', 'btn-danger');
+      deleteButton.innerHTML = 'Excluir';
+      deleteButton.onclick = () => excluirContato(index);
+
+      actionsContainer.appendChild(editButton);
+      actionsContainer.appendChild(deleteButton);
+      
+      listItem.appendChild(infoContainer);
+      listItem.appendChild(actionsContainer);
+
+      contactsList.appendChild(listItem);
+    });
+  }
+
+  function filtrarContatos() {
+    const contatosSalvos = JSON.parse(localStorage.getItem('contatos')) || [];
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const filteredContacts = contatosSalvos.filter(contato =>
+      contato.name.toLowerCase().includes(searchTerm) ||
+      contato.department.toLowerCase().includes(searchTerm) ||
+      contato.ramal.toLowerCase().includes(searchTerm) ||
+      contato.email.toLowerCase().includes(searchTerm)
+    );
+
+    // Exibir contatos filtrados
+    const contactsList = document.getElementById('contactsList');
+
+    // Limpar a lista antes de exibir os contatos filtrados
+    contactsList.innerHTML = '';
+
+    filteredContacts.forEach((contato, index) => {
+      const listItem = document.createElement('li');
+      listItem.classList.add('contact-item');
+      
+      const infoContainer = document.createElement('div');
+      infoContainer.innerHTML = `
+        <strong>${contato.name}</strong> - ${contato.department} - Ramal: ${contato.ramal} - Email: ${contato.email}
+      `;
+      
+      const actionsContainer = document.createElement('div');
+      
+      const editButton = document.createElement('button');
+      editButton.classList.add('btn', 'btn-warning', 'mr-2');
+      editButton.innerHTML = 'Editar';
+      editButton.onclick = () => editarContato(index);
+      
+      const deleteButton = document.createElement('button');
+      deleteButton.classList.add('btn', 'btn-danger');
+      deleteButton.innerHTML = 'Excluir';
+      deleteButton.onclick = () => excluirContato(index);
+
+      actionsContainer.appendChild(editButton);
+      actionsContainer.appendChild(deleteButton);
+      
+      listItem.appendChild(infoContainer);
+      listItem.appendChild(actionsContainer);
+
+      contactsList.appendChild(listItem);
+    });
+  }
+
+  function limparLocalStorage() {
+    // Limpar o localStorage
+    localStorage.removeItem('contatos');
+
+    // Atualizar lista de contatos
+    exibirContatos();
+  }
+
+  function editarContato(index) {
+    const contatosSalvos = JSON.parse(localStorage.getItem('contatos')) || [];
+    const contato = contatosSalvos[index];
+
+    // Preencher o formulário de edição
+    document.getElementById('name').value = contato.name;
+    document.getElementById('department').value = contato.department;
+    document.getElementById('ramal').value = contato.ramal;
+    document.getElementById('email').value = contato.email;
+
+    // Remover o contato da lista
+    contatosSalvos.splice(index, 1);
+
+    // Atualizar o localStorage
+    localStorage.setItem('contatos', JSON.stringify(contatosSalvos));
+
+    // Atualizar a lista de contatos exibida
+    exibirContatos();
+  }
+
+  function excluirContato(index) {
+    const contatosSalvos = JSON.parse(localStorage.getItem('contatos')) || [];
+
+    // Remover o contato da lista
+    contatosSalvos.splice(index, 1);
+
+    // Atualizar o localStorage
+    localStorage.setItem('contatos', JSON.stringify(contatosSalvos));
+
+    // Atualizar a lista de contatos exibida
+    exibirContatos();
+  }
+
+  // Exibir contatos na inicialização
+  exibirContatos();
+</script>
+
+</body>
+</html>
